@@ -18,6 +18,7 @@
 - [x] Cubes jusqu'à `R = 750` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 1000` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 1500` : recherche complète, résultat nul.
+- [x] Cubes jusqu'à `R = 2000` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 250` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 500` : recherche complète, résultat nul.
 

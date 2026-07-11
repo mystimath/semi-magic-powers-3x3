@@ -207,6 +207,32 @@ ont passé. Le run complet a ensuite été repris et validé sans perte de recor
 Artefacts : `work/cubes_R1500`, le CSV et le résumé JSON R1500, et
 `scripts/run_cubes_R1500.ps1`.
 
+## Cubes — R = 2000
+
+- Date : 11 juillet 2026
+- Puissance : 3
+- Racines : 1 à 2000, positives et globalement distinctes
+- Shards : 256
+- Triples : 1 331 334 000
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 21 301 344 000 octets
+- Taille d'un record : 16 octets (`<u8` pour le code des triples)
+- Sommes distinctes : 1 149 694 966
+- Sommes avec au moins 2 triples : 148 809 304
+- Sommes avec au moins 3 triples : 25 695 521
+- Taille maximale d'un groupe : 20
+- Paires de triples : 100 977 719
+- Paires disjointes : 97 236 063
+- Alignements testés : 583 416 378
+- Troisièmes lignes puissances : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 1 630,96063080004 s
+
+Artefacts : `work/cubes_R2000`, le CSV et le résumé JSON R2000, et
+`scripts/run_cubes_R2000.ps1`.
+
 ## Puissances quatrièmes — R = 250
 
 - Date : 11 juillet 2026
