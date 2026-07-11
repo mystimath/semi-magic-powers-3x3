@@ -303,3 +303,29 @@ Artefacts :
 - `results/fourth-powers/semimagic_3x3_fourth_R500.csv`
 - `logs/semimagic_3x3_fourth_R500_summary.json`
 - `scripts/run_fourth_R500.ps1`
+
+## Puissances quatrièmes — R = 750
+
+- Date : 11 juillet 2026
+- Puissance : 4
+- Racines : 1 à 750, positives et globalement distinctes
+- Shards : 256
+- Triples : 70 031 500
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 840 378 000 octets
+- Sommes distinctes : 69 812 223
+- Sommes avec au moins 2 triples : 204 472
+- Sommes avec au moins 3 triples : 8 458
+- Taille maximale d'un groupe : 12
+- Paires de triples : 46 884
+- Paires disjointes : 46 775
+- Alignements testés : 280 650
+- Troisièmes lignes puissances : 0
+- Troisièmes triples indexés : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 60,7759078000672 s
+
+Artefacts : `work/fourth_R750`, le CSV et le résumé JSON R750, et
+`scripts/run_fourth_R750.ps1`.
