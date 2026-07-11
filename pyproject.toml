@@ -1,0 +1,8 @@
+[project]
+name = "semi-magic-powers-3x3"
+version = "0.1.0"
+description = "Recherche expérimentale de carrés semi-magiques 3x3 de puissances"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 100

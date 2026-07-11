@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Résultats potentiellement volumineux
+results/**/*.csv
+logs/**/*.json
+logs/**/*.log
+
+# Conserver les dossiers vides
+!results/**/.gitkeep
+!logs/**/.gitkeep
