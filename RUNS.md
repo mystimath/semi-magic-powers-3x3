@@ -116,6 +116,61 @@ Artefacts :
 - `scripts/run_cubes_R500.ps1`
 - `scripts/validate_cubes_R500.ps1`
 
+## Cubes — R = 750
+
+- Date : 11 juillet 2026
+- Puissance : 3
+- Racines : 1 à 750, positives et globalement distinctes
+- Shards : 256
+- Triples : 70 031 500
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 840 378 000 octets
+- Sommes distinctes : 60 663 560
+- Sommes avec au moins 2 triples : 7 738 250
+- Sommes avec au moins 3 triples : 1 298 431
+- Taille maximale d'un groupe : 13
+- Paires de triples : 4 987 954
+- Paires disjointes : 4 675 701
+- Alignements testés : 28 054 206
+- Troisièmes lignes puissances : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 92,23130170001241 s
+
+Artefacts : `work/cubes_R750`, le CSV et le résumé JSON R750, et
+`scripts/run_cubes_R750.ps1`.
+
+## Cubes — R = 1000
+
+- Date : 11 juillet 2026
+- Puissance : 3
+- Racines : 1 à 1000, positives et globalement distinctes
+- Shards : 256
+- Triples : 166 167 000
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 1 994 004 000 octets
+- Sommes distinctes : 143 758 544
+- Sommes avec au moins 2 triples : 18 454 166
+- Sommes avec au moins 3 triples : 3 130 468
+- Taille maximale d'un groupe : 15
+- Paires de triples : 12 123 833
+- Paires disjointes : 11 469 063
+- Alignements testés : 68 814 378
+- Troisièmes lignes puissances : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 232,79438730000402 s
+
+Le premier lancement a rencontré un verrou Windows transitoire lors du
+remplacement atomique du manifeste à 92,6 % de la génération. La même commande,
+sans `--overwrite`, a repris à `next_a = 589`. Le backend réessaie désormais
+brièvement les remplacements atomiques refusés par Windows.
+
+Artefacts : `work/cubes_R1000`, le CSV et le résumé JSON R1000, et
+`scripts/run_cubes_R1000.ps1`.
+
 ## Puissances quatrièmes — R = 250
 
 - Date : 11 juillet 2026
