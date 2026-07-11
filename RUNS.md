@@ -355,3 +355,29 @@ Artefacts : `work/fourth_R750`, le CSV et le résumé JSON R750, et
 
 Artefacts : `work/fourth_R1000`, le CSV et le résumé JSON R1000, et
 `scripts/run_fourth_R1000.ps1`.
+
+## Puissances quatrièmes — R = 1500
+
+- Date : 11 juillet 2026
+- Puissance : 4
+- Racines : 1 à 1500, positives et globalement distinctes
+- Shards : 256
+- Triples : 561 375 500
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 8 982 008 000 octets
+- Sommes distinctes : 560 366 519
+- Sommes avec au moins 2 triples : 936 372
+- Sommes avec au moins 3 triples : 37 858
+- Taille maximale d'un groupe : 12
+- Paires de triples : 236 697
+- Paires disjointes : 236 359
+- Alignements testés : 1 418 154
+- Troisièmes lignes puissances : 0
+- Troisièmes triples indexés : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 421,635932199992 s
+
+Artefacts : `work/fourth_R1500`, le CSV et le résumé JSON R1500, et
+`scripts/run_fourth_R1500.ps1`.
