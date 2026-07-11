@@ -8,12 +8,14 @@ from pathlib import Path
 SRC = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(SRC))
 
+from semimagic_core import canonical_grid  # noqa: E402
 from semimagic_disk_backend import (  # noqa: E402
     RunConfig,
     decode_roots,
     encode_roots_scalar,
     generate_shards,
     search_shards,
+    search_one_shard,
     shard_id_for_sum,
     shard_path,
     validate_disk_layout,
@@ -89,6 +91,38 @@ class DiskBackendTests(unittest.TestCase):
             self.assertTrue(summary["search_complete"])
             self.assertEqual(summary["stats"]["records"], config.total_triples)
             self.assertEqual(summary["results_count"], 0)
+
+    def test_sallows_square_is_found(self) -> None:
+        import numpy as np
+
+        config = RunConfig(power=2, max_root=127, shard_count=256)
+        target_sum = 21609
+        triples = ((46, 58, 127), (2, 94, 113), (74, 82, 97))
+        expected_roots = canonical_grid(
+            (127, 46, 58, 2, 113, 94, 74, 82, 97)
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            work_dir = Path(temp_dir) / "run"
+            shard_id = shard_id_for_sum(target_sum, config)
+            path = shard_path(work_dir, shard_id)
+            path.parent.mkdir(parents=True)
+            records = np.empty(len(triples), dtype=config.record_dtype)
+            records["sum"] = target_sum
+            records["code"] = [
+                encode_roots_scalar(*triple, config.root_bits)
+                for triple in triples
+            ]
+            records.tofile(path)
+
+            payload = search_one_shard(work_dir, config, shard_id)
+
+        self.assertEqual(payload["stats"]["solutions"], 1)
+        result = payload["results"][0]
+        observed_roots = tuple(result[f"root_{name}"] for name in "abcdefghi")
+        self.assertEqual(observed_roots, expected_roots)
+        self.assertEqual(result["magic_sum"], 21609)
+        self.assertFalse(result["is_fully_magic"])
 
 
 if __name__ == "__main__":

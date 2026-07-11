@@ -20,11 +20,11 @@ from semimagic_disk_backend import (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Recherche exacte sur disque de carrés semi-magiques 3×3 de cubes "
-            "ou de puissances quatrièmes, adaptée à R=500."
+            "Recherche exacte sur disque de carrés semi-magiques 3×3 de carrés, "
+            "cubes ou puissances quatrièmes, adaptée à R=500."
         )
     )
-    parser.add_argument("--power", type=int, choices=(3, 4), required=True)
+    parser.add_argument("--power", type=int, choices=(2, 3, 4), required=True)
     parser.add_argument("--max-root", type=int, required=True)
     parser.add_argument("--work-dir", type=Path, required=True)
     parser.add_argument("--shards", type=int, default=256)

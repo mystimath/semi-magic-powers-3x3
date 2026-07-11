@@ -27,8 +27,8 @@ class RunConfig:
     distinct_roots: bool = True
 
     def validate(self) -> None:
-        if self.power not in (3, 4):
-            raise ValueError("La puissance doit valoir 3 ou 4.")
+        if self.power not in (2, 3, 4):
+            raise ValueError("La puissance doit valoir 2, 3 ou 4.")
         if self.max_root < 3:
             raise ValueError("max_root doit être supérieur ou égal à 3.")
         if self.shard_count < 1:

@@ -1,7 +1,8 @@
 # Carrés semi-magiques 3×3 de puissances
 
 Recherche expérimentale exacte de carrés semi-magiques 3×3 dont les neuf
-entrées sont des cubes (`k = 3`) ou des puissances quatrièmes (`k = 4`).
+entrées sont des carrés (`k = 2`), des cubes (`k = 3`) ou des puissances
+quatrièmes (`k = 4`).
 
 Une grille est semi-magique lorsque ses trois lignes et ses trois colonnes ont
 la même somme. Les diagonales ne sont pas imposées. Les recherches V2 utilisent
@@ -15,7 +16,7 @@ des racines strictement positives et globalement distinctes.
 - `src/semimagic_disk_backend.py` : génération, recherche, agrégation et
   validation du format sur disque.
 
-Le moteur V2 accepte `--power 3` et `--power 4`. Un répertoire de travail déjà
+Le moteur V2 accepte `--power 2`, `--power 3` et `--power 4`. Un répertoire de travail déjà
 muni d'un manifeste compatible est repris sans `--overwrite`. Les résultats de
 chaque shard sont conservés dans `work/.../search`, ce qui permet de ne retraiter
 que les shards manquants.
@@ -60,3 +61,13 @@ python src/search_semimagic_3x3_powers_v2_disk.py `
 
 La méthodologie est détaillée dans `METHODOLOGY.md`, l'état courant dans
 `STATUS.md` et les exécutions scientifiques dans `RUNS.md`.
+
+## Cas de référence : Sallows
+
+Le run `scripts/run_squares_R127.ps1` sert de contrôle positif du moteur. Il
+retrouve le carré semi-magique de carrés de Lee Sallows parmi 48 classes
+canoniques à `R = 127`. Les six sommes de lignes et colonnes valent `21 609`.
+
+Le run indépendant `scripts/run_squares_R52.ps1` trouve une autre classe,
+unique à cette borne et de racine maximale minimale parmi les solutions du run
+R127. Sa somme commune vaut `3 249 = 57²`.

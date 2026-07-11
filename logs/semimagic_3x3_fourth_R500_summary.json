@@ -1,0 +1,33 @@
+{
+  "power": 4,
+  "max_root": 500,
+  "shard_count": 256,
+  "positive": true,
+  "distinct_roots": true,
+  "format_version": 2,
+  "root_bits": 9,
+  "code_dtype": "<u4",
+  "record_itemsize": 12,
+  "total_triples": 20708500,
+  "min_sum": 98,
+  "max_sum": 186007482017,
+  "shard_width": 726591727,
+  "completed_shards": 256,
+  "search_complete": true,
+  "stats": {
+    "records": 20708500,
+    "sums_total": 20621339,
+    "collision_sums_ge_2": 81514,
+    "candidate_sums_ge_3": 3401,
+    "max_group_size": 10,
+    "triple_pairs": 17607,
+    "disjoint_pairs": 17567,
+    "alignments_tested": 105402,
+    "third_row_power_hits": 0,
+    "third_triple_hits": 0,
+    "solutions": 0,
+    "elapsed_seconds": 18.310254199994233
+  },
+  "results_count": 0,
+  "results": []
+}

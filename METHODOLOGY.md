@@ -3,7 +3,7 @@
 ## 1. Définition
 
 On cherche neuf racines entières positives et distinctes `r1, ..., r9` telles
-que les valeurs `r1^k, ..., r9^k`, avec `k` égal à 3 ou 4, forment une grille
+que les valeurs `r1^k, ..., r9^k`, avec `k` égal à 2, 3 ou 4, forment une grille
 3×3 dont les trois lignes et les trois colonnes ont une même somme `S`. Les
 diagonales sont libres.
 

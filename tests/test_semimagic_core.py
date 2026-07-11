@@ -43,6 +43,16 @@ class SemimagicCoreTests(unittest.TestCase):
     def test_non_semimagic_grid(self) -> None:
         self.assertFalse(is_semimagic((1, 2, 3, 4, 5, 6, 7, 8, 9)))
 
+    def test_smallest_observed_distinct_square_semimagic(self) -> None:
+        roots = (4, 23, 52, 32, 44, 17, 47, 28, 16)
+        values = tuple(root * root for root in roots)
+        self.assertEqual(len(set(roots)), 9)
+        self.assertTrue(is_semimagic(values))
+        self.assertEqual(row_sums(values), (3249, 3249, 3249))
+        self.assertEqual(column_sums(values), (3249, 3249, 3249))
+        self.assertNotEqual(values[0] + values[4] + values[8], 3249)
+        self.assertNotEqual(values[2] + values[4] + values[6], 3249)
+
     def test_canonicalization_is_invariant(self) -> None:
         grid = (8, 1, 6, 3, 5, 7, 4, 9, 2)
         transformed = permute_grid(grid, (2, 0, 1), (1, 2, 0))

@@ -10,7 +10,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Profile les collisions de sommes de triples de puissances."
     )
-    parser.add_argument("--power", type=int, choices=(3, 4), required=True)
+    parser.add_argument("--power", type=int, choices=(2, 3, 4), required=True)
     parser.add_argument("--max-root", type=int, required=True)
     parser.add_argument(
         "--distinct-roots",

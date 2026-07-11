@@ -12,17 +12,21 @@
 
 ## Runs scientifiques
 
+- [x] Carrés jusqu'à `R = 52` : première classe observée, unique à cette borne.
+- [x] Carrés jusqu'à `R = 127` : 48 classes semi-magiques, dont Sallows.
 - [x] Cubes jusqu'à `R = 500` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 250` : recherche complète, résultat nul.
-- [ ] Puissances quatrièmes jusqu'à `R = 500`.
+- [x] Puissances quatrièmes jusqu'à `R = 500` : recherche complète, résultat nul.
 
 Les chiffres exacts et commandes sont consignés dans `RUNS.md`. Aucun résultat
 n'est annoncé avant la fin et l'agrégation de tous les shards.
 
 ## Suite
 
+- Étudier les 47 autres classes semi-magiques trouvées à `power = 2`, `R = 127`.
+- Ajouter séparément un mode autorisant les racines répétées pour retrouver Parker.
 - [x] Valider le run des puissances quatrièmes `R = 250`.
 - [x] Préparer le script `R = 500` sans lancer ce run.
-- [ ] Vérifier une dernière fois les ressources disponibles avant de lancer `R = 500`.
+- [x] Vérifier les ressources puis exécuter et valider `R = 500`.
 - Définir séparément la notion de presque-solution avant toute recherche 8/9,
   7/9 ou 6/9.
