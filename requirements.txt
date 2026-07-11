@@ -1,0 +1,145 @@
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+from semimagic_disk_backend import (
+    RunConfig,
+    aggregate_search,
+    atomic_write_json,
+    generate_shards,
+    search_shards,
+    validate_disk_layout,
+    write_results_csv,
+)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Recherche exacte sur disque de carrés semi-magiques 3×3 de cubes "
+            "ou de puissances quatrièmes, adaptée à R=500."
+        )
+    )
+    parser.add_argument("--power", type=int, choices=(3, 4), required=True)
+    parser.add_argument("--max-root", type=int, required=True)
+    parser.add_argument("--work-dir", type=Path, required=True)
+    parser.add_argument("--shards", type=int, default=256)
+    parser.add_argument(
+        "--phase",
+        choices=("all", "generate", "search", "aggregate", "validate"),
+        default="all",
+    )
+    parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--progress-a", type=int, default=10)
+    parser.add_argument("--progress-shards", type=int, default=1)
+    parser.add_argument("--max-results", type=int, default=0)
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--summary-json", type=Path)
+    return parser.parse_args()
+
+
+def print_header(config: RunConfig, args: argparse.Namespace) -> None:
+    estimated_disk = config.total_triples * config.record_dtype.itemsize
+    print("=" * 78)
+    print("Carrés semi-magiques 3×3 de puissances — V2 sur disque")
+    print("=" * 78)
+    print(f"Puissance                 : {config.power}")
+    print(f"Racine maximale           : {config.max_root}")
+    print(f"Triples distincts         : {config.total_triples:,}")
+    print(f"Nombre de shards          : {config.shard_count}")
+    print(f"Taille d'un record        : {config.record_dtype.itemsize} octets")
+    print(f"Disque brut estimé        : {estimated_disk / (1024**2):,.1f} Mo")
+    print(f"Répertoire de travail     : {args.work_dir}")
+    print(f"Phase                     : {args.phase}")
+    print("=" * 78)
+
+
+def export_summary(
+    args: argparse.Namespace,
+    config: RunConfig,
+    summary: dict,
+) -> None:
+    if args.out:
+        count = write_results_csv(args.out, summary.get("results", []))
+        print(f"CSV final                 : {args.out} ({count} solution(s))")
+    if args.summary_json:
+        atomic_write_json(args.summary_json, summary)
+        print(f"Résumé JSON               : {args.summary_json}")
+
+
+def main() -> int:
+    args = parse_args()
+    if args.max_results < 0:
+        raise SystemExit("--max-results ne peut pas être négatif.")
+
+    config = RunConfig(
+        power=args.power,
+        max_root=args.max_root,
+        shard_count=args.shards,
+        positive=True,
+        distinct_roots=True,
+    )
+    config.validate()
+    print_header(config, args)
+    started = time.perf_counter()
+
+    if args.phase in ("all", "generate"):
+        manifest = generate_shards(
+            work_dir=args.work_dir,
+            config=config,
+            overwrite=args.overwrite,
+            progress_every_a=args.progress_a,
+        )
+        print(
+            f"Génération terminée       : {manifest['generated_records']:,} records, "
+            f"{sum(manifest['shard_sizes']) / (1024**2):,.1f} Mo"
+        )
+
+    if args.phase == "validate":
+        report = validate_disk_layout(args.work_dir, config)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 0 if report["ok"] else 1
+
+    summary: dict | None = None
+    if args.phase in ("all", "search"):
+        summary = search_shards(
+            work_dir=args.work_dir,
+            config=config,
+            max_results=args.max_results,
+            progress_every_shards=args.progress_shards,
+        )
+    elif args.phase == "aggregate":
+        summary = aggregate_search(args.work_dir, config)
+
+    if summary is not None:
+        stats = summary["stats"]
+        print("-" * 78)
+        print(f"Shards analysés           : {summary['completed_shards']}/{config.shard_count}")
+        print(f"Records analysés          : {stats['records']:,}")
+        print(f"Sommes distinctes         : {stats['sums_total']:,}")
+        print(f"Sommes avec ≥2 triples    : {stats['collision_sums_ge_2']:,}")
+        print(f"Sommes avec ≥3 triples    : {stats['candidate_sums_ge_3']:,}")
+        print(f"Taille maximale d'un groupe: {stats['max_group_size']:,}")
+        print(f"Paires de triples         : {stats['triple_pairs']:,}")
+        print(f"Paires disjointes         : {stats['disjoint_pairs']:,}")
+        print(f"Alignements testés        : {stats['alignments_tested']:,}")
+        print(f"Troisièmes lignes puissances: {stats['third_row_power_hits']:,}")
+        print(f"Troisièmes triples indexés: {stats['third_triple_hits']:,}")
+        print(f"Solutions uniques         : {summary['results_count']:,}")
+        export_summary(args, config, summary)
+
+    elapsed = time.perf_counter() - started
+    print(f"Temps de cette invocation : {elapsed:,.2f} s")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        print("\nInterruption utilisateur : les phases validées restent reprenables.", file=sys.stderr)
+        raise SystemExit(130)
