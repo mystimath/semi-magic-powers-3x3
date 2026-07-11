@@ -10,3 +10,5 @@ python src/search_semimagic_3x3_powers_v2_disk.py `
   --progress-shards 1 `
   --out results/cubes/semimagic_3x3_cubes_R500.csv `
   --summary-json logs/semimagic_3x3_cubes_R500_summary.json
+
+exit $LASTEXITCODE

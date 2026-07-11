@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 .env
+work/
 
 # Résultats potentiellement volumineux
 results/**/*.csv
