@@ -11,6 +11,11 @@ results/**/*.csv
 logs/**/*.json
 logs/**/*.log
 
+# Fichiers de configuration locaux
+config/**/*.yaml
+config/**/*.yml
+CODEX_POWER4_TASK.md
+
 # Conserver les dossiers vides
 !results/**/.gitkeep
 !logs/**/.gitkeep

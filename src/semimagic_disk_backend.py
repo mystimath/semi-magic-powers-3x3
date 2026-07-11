@@ -124,10 +124,12 @@ def encode_roots_vector(
     dtype: str,
 ) -> np.ndarray[Any, Any]:
     target_dtype = np.dtype(dtype)
+    factor_b = np.asarray(1 << bits, dtype=target_dtype)
+    factor_c = np.asarray(1 << (2 * bits), dtype=target_dtype)
     return (
         np.asarray(a, dtype=target_dtype)
-        | (np.asarray(b, dtype=target_dtype) << bits)
-        | (c.astype(target_dtype, copy=False) << (2 * bits))
+        | (np.asarray(b, dtype=target_dtype) * factor_b)
+        | (c.astype(target_dtype, copy=False) * factor_c)
     )
 
 

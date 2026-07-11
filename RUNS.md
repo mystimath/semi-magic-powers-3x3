@@ -69,6 +69,11 @@ Artefacts :
 - Solutions pleinement magiques : 0
 - Temps de recherche cumulé des shards : 14,8846363999837 s
 
+Analyse des diagonales sur toute l'orbite de chaque classe (et non seulement
+sur la représentation canonique du CSV) : une seule classe possède au moins une
+diagonale de somme `S`, celle de Sallows (index CSV 46). Aucune classe n'a ses
+deux diagonales à `S`.
+
 Le carré de Sallows est retrouvé exactement une fois, à l'index CSV 46 en base
 zéro, sous la forme canonique suivante :
 
@@ -170,6 +175,37 @@ brièvement les remplacements atomiques refusés par Windows.
 
 Artefacts : `work/cubes_R1000`, le CSV et le résumé JSON R1000, et
 `scripts/run_cubes_R1000.ps1`.
+
+## Cubes — R = 1500
+
+- Date : 11 juillet 2026
+- Puissance : 3
+- Racines : 1 à 1500, positives et globalement distinctes
+- Shards : 256
+- Triples : 561 375 500
+- Shards terminés : 256/256
+- Recherche complète : oui
+- Validation du format disque : OK
+- Taille des records sur disque : 8 982 008 000 octets
+- Taille d'un record : 16 octets (`<u8` pour le code des triples)
+- Sommes distinctes : 485 098 793
+- Sommes avec au moins 2 triples : 62 597 192
+- Sommes avec au moins 3 triples : 10 749 912
+- Taille maximale d'un groupe : 20
+- Paires de triples : 42 023 395
+- Paires disjointes : 40 199 220
+- Alignements testés : 241 195 320
+- Troisièmes lignes puissances : 0
+- Solutions uniques : 0
+- Temps de recherche cumulé des shards : 691,313986499983 s
+
+Le premier démarrage a révélé un défaut NumPy dans le décalage des codes lorsque
+`R=1500` exige un encodage 64 bits. Le backend a été corrigé en conservant le
+même encodage binaire, puis les tests de round-trip et les 14 tests unitaires
+ont passé. Le run complet a ensuite été repris et validé sans perte de records.
+
+Artefacts : `work/cubes_R1500`, le CSV et le résumé JSON R1500, et
+`scripts/run_cubes_R1500.ps1`.
 
 ## Puissances quatrièmes — R = 250
 
