@@ -1,0 +1,24 @@
+{
+  "date": "2026-07-11",
+  "git_state": "main ahead of origin/main by 8 before ENGINE V3 commit",
+  "tests": [
+    "python -m unittest discover -s tests -v (21 tests)",
+    "direct R16 equals extensions R9->R16 and R7->R11->R16 for powers 2, 3, 4",
+    "interruption and resume",
+    "bounded shard merge and resume",
+    "incomplete shard detection",
+    "power 2 R52 scientific regression"
+  ],
+  "test_bounds": {"equivalence": 16, "benchmark": 35, "scientific_regression": 52},
+  "commands": [
+    "python -m unittest discover -s tests -v",
+    "python src/search_semimagic_3x3_powers_v3.py --power 2 --max-root 52 --shards 32 --work-dir work/v3_regression_squares_R52",
+    "python src/search_semimagic_3x3_powers_v3.py --power 2 --max-root 52 --shards 32 --work-dir work/v3_regression_squares_R52 --validate"
+  ],
+  "engine_version": 3,
+  "limitations": [
+    "20-byte records use more disk than V2",
+    "time limit is checked between shard merges",
+    "existing massive V2 work directories are not converted automatically"
+  ]
+}

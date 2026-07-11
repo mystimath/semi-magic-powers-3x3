@@ -21,6 +21,18 @@ muni d'un manifeste compatible est repris sans `--overwrite`. Les résultats de
 chaque shard sont conservés dans `work/.../search`, ce qui permet de ne retraiter
 que les shards manquants.
 
+## Extension incrémentale V3
+
+```powershell
+python src/search_semimagic_3x3_powers_v3.py --power 3 --max-root 100 `
+  --shards 64 --work-dir work/v3_cubes --checkpoint-every 1
+python src/search_semimagic_3x3_powers_v3.py --power 3 --max-root 150 `
+  --shards 64 --work-dir work/v3_cubes --resume --max-shards-this-run 16
+```
+
+Une reprise conserve la puissance, le nombre de shards, le work-dir et la borne
+cible. `--time-limit-minutes` borne les fusions; `--validate` contrôle le layout.
+
 ## Installation et tests
 
 Python 3.10 ou supérieur et NumPy sont requis.
