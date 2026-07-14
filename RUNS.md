@@ -381,3 +381,62 @@ Artefacts : `work/fourth_R1000`, le CSV et le résumé JSON R1000, et
 
 Artefacts : `work/fourth_R1500`, le CSV et le résumé JSON R1500, et
 `scripts/run_fourth_R1500.ps1`.
+
+## Puissances quatrièmes — R = 1750
+
+- Date : 14 juillet 2026
+- Triples : 891 698 500 ; shards : 256/256 ; validation : OK
+- Records : 14 267 176 000 octets ; sommes distinctes : 890 290 058
+- Groupes >=2 : 1 305 665 ; groupes >=3 : 52 643 ; groupe maximal : 16
+- Paires : 337 369 ; disjointes : 336 942 ; alignements : 2 021 652
+- Troisièmes lignes puissances : 0 ; solutions uniques : 0
+- Temps de recherche : 675,4966938 s ; temps total : 788,38 s
+- Artefacts : `work/fourth_R1750`, CSV, résumé JSON, rapport et `scripts/run_fourth_R1750.ps1`.
+
+## Cubes — R = 2250
+
+- Date : 14 juillet 2026
+- Triples : 1 895 907 000 ; shards : 256/256 ; validation : OK
+- Records : 30 334 512 000 octets ; sommes distinctes : 1 636 956 745
+- Groupes >=2 : 212 018 959 ; groupes >=3 : 36 679 400 ; groupe maximal : 20
+- Paires : 144 415 564 ; disjointes : 139 400 318 ; alignements : 836 401 908
+- Troisièmes lignes puissances : 0 ; solutions uniques : 0
+- Temps de recherche : 2 445,4517467 s ; temps total : 2 641,13 s
+- Artefacts : `work/cubes_R2250`, CSV, résumé JSON, rapport et `scripts/run_cubes_R2250.ps1`.
+
+## Carrés — catalogue R = 160 à R = 320
+
+Tous les runs utilisent des racines positives globalement distinctes, 256 shards, le moteur V2 exact et ont été validés avant le palier suivant.
+
+| R | Triples | Sommes | Groupes >=3 | Groupe max. | Alignements | Solutions |
+|---:|---:|---:|---:|---:|---:|---:|
+| 160 | 669 920 | 52 455 | 43 444 | 76 | 38 142 474 | 111 |
+| 200 | 1 313 400 | 83 426 | 70 655 | 94 | 96 287 790 | 220 |
+| 250 | 2 573 000 | 132 529 | 114 391 | 119 | 241 468 878 | 466 |
+| 320 | 5 410 240 | 220 806 | 193 783 | 154 | 664 656 990 | 1 011 |
+
+Artefacts : `work/squares_R<R>`, `results/squares/semimagic_3x3_squares_R<R>.csv` et `logs/squares/semimagic_3x3_squares_R<R>_summary.json`.
+
+## Carrés — R = 400
+
+- Date : 14 juillet 2026
+- Racines : 1 à 400, positives et globalement distinctes
+- Triples : 10 586 800 ; shards : 256/256 ; validation : OK
+- Records : 127 041 600 octets ; sommes distinctes : 349 893
+- Groupes >=2 : 327 927 ; groupes >=3 : 311 267 ; groupe maximal : 202
+- Paires : 292 279 929 ; disjointes : 275 339 536
+- Alignements : 1 652 037 216
+- Troisièmes lignes carrées : 12 199 ; troisièmes triples indexés : 3 900
+- Solutions canoniques uniques : 1 950
+- Temps de recherche : 1 465,3741122 s ; temps total : 1 472,29 s
+- Artefacts : `work/squares_R400`, CSV, résumé JSON et rapport R400.
+
+## Ordre de reprise convenu
+
+1. Carrés : palier final R = 500.
+2. Vérification power 2 : parcourir l'orbite de chaque classe et extraire les classes ayant au moins un représentant avec une diagonale égale à la somme magique, soit au moins 7 lignes magiques sur 8.
+3. Cubes : palier final R = 2500.
+4. Puissances quatrièmes : palier final R = 2000.
+5. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
+
+Ne pas lancer de recherche power 4 à R = 5000.
