@@ -404,6 +404,26 @@ Artefacts : `work/fourth_R1500`, le CSV et le résumé JSON R1500, et
 - Temps de recherche : 2 445,4517467 s ; temps total : 2 641,13 s
 - Artefacts : `work/cubes_R2250`, CSV, résumé JSON, rapport et `scripts/run_cubes_R2250.ps1`.
 
+## Cubes — R = 2500
+
+- Date : 15 juillet 2026
+- Triples : 2 601 042 500 ; shards : 256/256 ; validation : OK
+- Records : 41 616 680 000 octets ; sommes distinctes : 2 245 424 704
+- Groupes >=2 : 291 045 440 ; groupes >=3 : 50 417 211 ; groupe maximal : 21
+- Paires : 198 764 432 ; disjointes : 192 263 004
+- Alignements : 1 153 578 024
+- Troisièmes lignes puissances : 0 ; troisièmes triples indexés : 0
+- Solutions uniques : 0
+- Temps cumulé des shards : 4 657,6458134 s ; temps mural : 1 661,74 s
+
+La génération complète et les 31 premiers shards ont utilisé le moteur V2
+séquentiel. Les 225 shards restants ont été repris avec huit workers via
+`search_semimagic_shards_parallel.py`, sans recalculer les shards achevés.
+L'agrégation finale, la validation des 2 601 042 500 records et les 22 tests
+unitaires sont toutes réussies.
+
+Artefacts : `work/cubes_R2500`, CSV nul, résumé JSON, rapport,
+`scripts/run_cubes_R2500.ps1` et `scripts/resume_cubes_R2500_parallel.ps1`.
 ## Carrés — catalogue R = 160 à R = 320
 
 Tous les runs utilisent des racines positives globalement distinctes, 256 shards, le moteur V2 exact et ont été validés avant le palier suivant.
@@ -485,8 +505,7 @@ et `scripts/resume_squares_R750_parallel.ps1`.
 ## Ordre de reprise convenu
 
 1. Carrés : palier R = 1000.
-2. Cubes : palier final R = 2500.
-3. Puissances quatrièmes : palier final R = 2000.
-4. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
+2. Puissances quatrièmes : palier final R = 2000.
+3. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
 
 Ne pas lancer de recherche power 4 à R = 5000.

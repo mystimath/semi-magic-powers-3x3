@@ -32,6 +32,7 @@
 - [x] Cubes jusqu'à `R = 1500` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 2000` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 2250` : recherche complète, résultat nul.
+- [x] Cubes jusqu'à `R = 2500` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 250` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 500` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 750` : recherche complète, résultat nul.
@@ -58,6 +59,7 @@ n'est annoncé avant la fin et l'agrégation de tous les shards.
 - [x] Valider le run des puissances quatrièmes `R = 250`.
 - [x] Préparer le script `R = 500` sans lancer ce run.
 - [x] Vérifier les ressources puis exécuter et valider `R = 500`.
-- [ ] Terminer les puissances quatrièmes à `R = 2000` et les cubes à `R = 2500`.
+- [ ] Terminer les puissances quatrièmes à `R = 2000`.
+- [x] Terminer les cubes à `R = 2500`.
 - Définir séparément la notion de presque-solution avant toute recherche 8/9,
   7/9 ou 6/9.
