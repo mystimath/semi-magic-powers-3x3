@@ -431,12 +431,62 @@ Artefacts : `work/squares_R<R>`, `results/squares/semimagic_3x3_squares_R<R>.csv
 - Temps de recherche : 1 465,3741122 s ; temps total : 1 472,29 s
 - Artefacts : `work/squares_R400`, CSV, résumé JSON et rapport R400.
 
+## Carrés — R = 500
+
+- Date : 15 juillet 2026
+- Racines : 1 à 500, positives et globalement distinctes
+- Triples : 20 708 500 ; shards : 256/256 ; validation : OK
+- Records : 248 502 000 octets ; sommes distinctes : 553 403
+- Groupes >=2 : 522 126 ; groupes >=3 : 498 338 ; groupe maximal : 261
+- Paires : 717 849 658 ; disjointes : 682 753 714
+- Alignements : 4 096 522 284
+- Troisièmes lignes carrées : 22 744 ; troisièmes triples indexés : 7 322
+- Solutions canoniques uniques : 3 661 ; solutions primitives : 3 054
+- Temps de recherche : 3 776,288869 s ; temps total : 3 786,13 s
+
+L'analyse des six transversales de chaque orbite trouve quatre classes avec
+une transversale de somme magique, de racines maximales 127, 254, 381 et 446.
+Les trois premières sont la classe de Sallows et ses changements d'échelle par
+2 et 3 ; la classe de racine maximale 446 est primitive et distincte. Chacune
+possède exactement une telle transversale, donc aucune classe n'est pleinement
+magique.
+
+Artefacts : `work/squares_R500`, CSV principal, catalogues complet, primitif et
+à diagonale magique, résumé JSON, rapport R500 et `scripts/run_squares_R500.ps1`.
+## Carrés — R = 750
+
+- Date : 15 juillet 2026
+- Racines : 1 à 750, positives et globalement distinctes
+- Triples : 70 031 500 ; shards : 256/256 ; validation : OK
+- Records : 840 378 000 octets ; sommes distinctes : 1 269 997
+- Groupes >=2 : 1 211 390 ; groupes >=3 : 1 165 348 ; groupe maximal : 390
+- Paires : 3 660 483 077 ; disjointes : 3 529 749 523
+- Alignements : 21 178 497 138
+- Troisièmes lignes carrées : 67 371 ; troisièmes triples indexés : 21 946
+- Solutions canoniques uniques : 10 973 ; solutions primitives : 8 816
+- Temps cumulé des shards : 21 514,0638975 s ; temps mural : 6 214,80 s
+
+L'analyse indépendante des six transversales de chaque classe trouve six
+classes de racines maximales 127, 254, 381, 446, 508 et 635. Les classes 127,
+254, 381, 508 et 635 sont Sallows et ses changements d'échelle par 2, 3, 4 et
+5. La classe 446 reste la seule autre classe primitive. Chacune possède une
+seule transversale magique et aucune classe n'est pleinement magique.
+
+Le run a commencé avec le moteur séquentiel validé, puis a repris après 53
+shards avec huit workers indépendants. L'orchestration parallèle réutilise
+exactement `search_one_shard` et ses écritures JSON atomiques ; son équivalence
+avec la voie séquentielle a été vérifiée sur les 22 100 records du run R52,
+avec statistiques et CSV scientifiques identiques.
+
+Artefacts : `work/squares_R750`, CSV principal, catalogues complet, primitif et
+à diagonale magique, résumé JSON, rapport R750, `scripts/run_squares_R750.ps1`
+et `scripts/resume_squares_R750_parallel.ps1`.
+
 ## Ordre de reprise convenu
 
-1. Carrés : palier final R = 500.
-2. Vérification power 2 : parcourir l'orbite de chaque classe et extraire les classes ayant au moins un représentant avec une diagonale égale à la somme magique, soit au moins 7 lignes magiques sur 8.
-3. Cubes : palier final R = 2500.
-4. Puissances quatrièmes : palier final R = 2000.
-5. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
+1. Carrés : palier R = 1000.
+2. Cubes : palier final R = 2500.
+3. Puissances quatrièmes : palier final R = 2000.
+4. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
 
 Ne pas lancer de recherche power 4 à R = 5000.

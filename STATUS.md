@@ -19,6 +19,13 @@
 - [x] Carrés jusqu'à `R = 250` : 466 classes semi-magiques.
 - [x] Carrés jusqu'à `R = 320` : 1 011 classes semi-magiques.
 - [x] Carrés jusqu'à `R = 400` : 1 950 classes semi-magiques.
+- [x] Carrés jusqu'à `R = 500` : 3 661 classes semi-magiques, dont 3 054 primitives.
+- [x] Analyse des orbites `power = 2` à `R = 500` : 4 classes avec une
+  transversale de somme magique, aucune classe pleinement magique.
+- [x] Carrés jusqu'à `R = 750` : 10 973 classes semi-magiques, dont 8 816 primitives.
+- [x] Analyse des orbites `power = 2` à `R = 750` : 6 classes avec une
+  transversale magique ; les deux ajouts sont Sallows ×4 et ×5, sans nouvelle
+  classe primitive au-delà de la classe 446.
 - [x] Cubes jusqu'à `R = 500` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 750` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 1000` : recherche complète, résultat nul.
@@ -37,8 +44,13 @@ n'est annoncé avant la fin et l'agrégation de tous les shards.
 
 ## Suite
 
-- [ ] Terminer le catalogue `power = 2` à `R = 500`.
-- [ ] Après R = 500, vérifier toutes les classes power = 2 sur leur orbite et
+- [ ] Étendre le catalogue des carrés à `R = 1000`. Run ajourné en raison de
+  la canicule et des contraintes thermiques dans un bureau non climatisé ; à
+  reprendre lorsque les températures permettront une exécution sûre. Estimation
+  actuelle : environ 3 à 6 heures avec huit workers et 3 à 5 Go d'espace libre.
+
+- [x] Terminer le catalogue `power = 2` à `R = 500`.
+- [x] Après R = 500, vérifier toutes les classes power = 2 sur leur orbite et
   extraire celles ayant au moins une diagonale de somme magique (au moins 7/8 lignes).
 - [ ] Définir ensuite le sous-projet bi-semi-magique : grille initiale magique,
   grille des carrés semi-magique.
