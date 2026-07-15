@@ -26,6 +26,10 @@
 - [x] Analyse des orbites `power = 2` à `R = 750` : 6 classes avec une
   transversale magique ; les deux ajouts sont Sallows ×4 et ×5, sans nouvelle
   classe primitive au-delà de la classe 446.
+- [x] Carrés jusqu'à `R = 1000` : 23 215 classes semi-magiques, dont 18 248 primitives.
+- [x] Analyse des orbites `power = 2` à `R = 1000` : 10 classes avec une
+  transversale magique ; nouvelle classe primitive du catalogue à racine
+  maximale 878, sans présumer de son antériorité externe.
 - [x] Cubes jusqu'à `R = 500` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 750` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 1000` : recherche complète, résultat nul.
@@ -46,10 +50,8 @@ n'est annoncé avant la fin et l'agrégation de tous les shards.
 
 ## Suite
 
-- [ ] Étendre le catalogue des carrés à `R = 1000`. Run ajourné en raison de
-  la canicule et des contraintes thermiques dans un bureau non climatisé ; à
-  reprendre lorsque les températures permettront une exécution sûre. Estimation
-  actuelle : environ 3 à 6 heures avec huit workers et 3 à 5 Go d'espace libre.
+- [x] Étendre le catalogue des carrés à `R = 1000`.
+- [ ] Étendre progressivement le catalogue des carrés jusqu'à `R = 1500`.
 
 - [x] Terminer le catalogue `power = 2` à `R = 500`.
 - [x] Après R = 500, vérifier toutes les classes power = 2 sur leur orbite et

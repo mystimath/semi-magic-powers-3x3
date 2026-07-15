@@ -523,7 +523,24 @@ et `scripts/resume_squares_R750_parallel.ps1`.
 
 ## Ordre de reprise convenu
 
-1. Carrés : palier R = 1000.
+1. Carrés : poursuivre vers le palier R = 1500 par incréments prudents.
 2. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
 
 Ne pas lancer de recherche power 4 à R = 5000.
+
+## Carrés — R = 1000
+
+- Date : 16 juillet 2026
+- Racines : 1 à 1000, positives et globalement distinctes
+- Triples : 166 167 000 ; shards : 256/256 ; validation : OK
+- Records : 1 994 004 000 octets ; sommes distinctes : 2 285 787
+- Groupes >=2 : 2 193 675 ; groupes >=3 : 2 120 161 ; groupe maximal : 520
+- Paires : 11 615 079 060 ; disjointes : 11 284 537 468
+- Alignements : 67 707 224 808
+- Troisièmes lignes carrées : 141 800 ; troisièmes triples indexés : 46 430
+- Solutions canoniques uniques : 23 215 ; solutions primitives : 18 248
+- Temps cumulé des shards : 70 086,5976858 s ; temps mural : 8 793,16 s
+
+L'analyse des orbites trouve dix classes à transversale magique. Sept sont les changements d'échelle ×1 à ×7 de Sallows, deux sont la classe 446 et son changement d'échelle ×2, et une classe primitive supplémentaire a pour racine maximale 878. Chacune possède exactement une transversale magique ; aucune classe n'est pleinement magique. La classe R878 est nouvelle dans le catalogue du projet, sans préjuger d'une éventuelle antériorité externe.
+
+La validation des 166 167 000 records et les 22 tests du moteur réussissent. Artefacts : `work/squares_R1000`, CSV principal, catalogues complet, primitif et à diagonale magique, résumé JSON, rapport R1000 et `scripts/run_squares_R1000_parallel.ps1`.
