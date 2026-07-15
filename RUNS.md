@@ -393,6 +393,25 @@ Artefacts : `work/fourth_R1500`, le CSV et le résumé JSON R1500, et
 - Temps de recherche : 675,4966938 s ; temps total : 788,38 s
 - Artefacts : `work/fourth_R1750`, CSV, résumé JSON, rapport et `scripts/run_fourth_R1750.ps1`.
 
+## Puissances quatrièmes — R = 2000
+
+- Date : 15 juillet 2026
+- Triples : 1 331 334 000 ; shards : 256/256 ; validation : OK
+- Records : 21 301 344 000 octets ; sommes distinctes : 1 329 459 288
+- Groupes >=2 : 1 736 045 ; groupes >=3 : 69 930 ; groupe maximal : 16
+- Paires : 457 852 ; disjointes : 457 323
+- Alignements : 2 743 938
+- Troisièmes lignes puissances : 0 ; troisièmes triples indexés : 0
+- Solutions uniques : 0
+- Temps de recherche : 990,3160145 s ; temps mural : 1 140,57 s
+
+Le moteur V2 séquentiel a terminé la génération, les 256 shards et l'agrégation
+sans interruption. La validation indépendante des records et les 22 tests
+unitaires sont réussis. Le script de reprise parallèle à huit workers a été
+préparé comme voie de secours mais n'a pas été nécessaire pour ce run.
+
+Artefacts : `work/fourth_R2000`, CSV nul, résumé JSON, rapport,
+`scripts/run_fourth_R2000.ps1` et `scripts/resume_fourth_R2000_parallel.ps1`.
 ## Cubes — R = 2250
 
 - Date : 14 juillet 2026
@@ -505,7 +524,6 @@ et `scripts/resume_squares_R750_parallel.ps1`.
 ## Ordre de reprise convenu
 
 1. Carrés : palier R = 1000.
-2. Puissances quatrièmes : palier final R = 2000.
-3. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
+2. Sous-projet semi-bimagic : grille initiale magique et grille des carrés semi-magique.
 
 Ne pas lancer de recherche power 4 à R = 5000.

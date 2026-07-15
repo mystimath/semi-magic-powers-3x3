@@ -39,6 +39,7 @@
 - [x] Puissances quatrièmes jusqu'à `R = 1000` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 1500` : recherche complète, résultat nul.
 - [x] Puissances quatrièmes jusqu'à `R = 1750` : recherche complète, résultat nul.
+- [x] Puissances quatrièmes jusqu'à `R = 2000` : recherche complète, résultat nul.
 
 Les chiffres exacts et commandes sont consignés dans `RUNS.md`. Aucun résultat
 n'est annoncé avant la fin et l'agrégation de tous les shards.
