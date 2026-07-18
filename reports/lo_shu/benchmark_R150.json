@@ -1,0 +1,113 @@
+{
+  "created_utc": "2026-07-18T15:55:19.581520+00:00",
+  "python": "3.11.15 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:12:15) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "domain": {
+    "power": 2,
+    "max_root": 150,
+    "positive_roots": true,
+    "distinct_roots": true,
+    "target": "semimagic classes with at least one magic transversal",
+    "equivalence": "S3xS3 and transposition"
+  },
+  "repeats": 3,
+  "runs": [
+    {
+      "engine": "general_sum_index",
+      "run": 1,
+      "wall_seconds": 713.0657726,
+      "cpu_seconds": 711.890625,
+      "python_peak_bytes": 50029016,
+      "class_count": 1
+    },
+    {
+      "engine": "lo_shu_difference_index",
+      "run": 1,
+      "wall_seconds": 0.026466300000038245,
+      "cpu_seconds": 0.03125,
+      "python_peak_bytes": 35684,
+      "class_count": 1
+    },
+    {
+      "engine": "general_sum_index",
+      "run": 2,
+      "wall_seconds": 703.5741436000001,
+      "cpu_seconds": 702.390625,
+      "python_peak_bytes": 49901400,
+      "class_count": 1
+    },
+    {
+      "engine": "lo_shu_difference_index",
+      "run": 2,
+      "wall_seconds": 0.024026300000059564,
+      "cpu_seconds": 0.015625,
+      "python_peak_bytes": 32118,
+      "class_count": 1
+    },
+    {
+      "engine": "general_sum_index",
+      "run": 3,
+      "wall_seconds": 707.0197467000003,
+      "cpu_seconds": 705.90625,
+      "python_peak_bytes": 49901400,
+      "class_count": 1
+    },
+    {
+      "engine": "lo_shu_difference_index",
+      "run": 3,
+      "wall_seconds": 0.023808500000086497,
+      "cpu_seconds": 0.015625,
+      "python_peak_bytes": 32118,
+      "class_count": 1
+    }
+  ],
+  "medians": {
+    "general_sum_index": {
+      "wall_seconds": 707.0197467000003,
+      "cpu_seconds": 705.90625,
+      "python_peak_bytes": 49901400
+    },
+    "lo_shu_difference_index": {
+      "wall_seconds": 0.024026300000059564,
+      "cpu_seconds": 0.015625,
+      "python_peak_bytes": 32118
+    }
+  },
+  "specialized_wall_speedup": 29426.909124511367,
+  "class_sets_equal": true,
+  "class_count": 1,
+  "classes": [
+    [
+      2,
+      74,
+      127,
+      94,
+      97,
+      58,
+      113,
+      82,
+      46
+    ]
+  ],
+  "general_stats": {
+    "root_triples": 551300,
+    "distinct_sums": 45813,
+    "candidate_sums": 41173,
+    "triple_pairs": 5509573,
+    "disjoint_pairs": 4857245,
+    "row_alignments": 29143470,
+    "square_third_rows": 639,
+    "semimagic_classes": 94,
+    "transversal_classes": 1
+  },
+  "specialized_stats": {
+    "progressions": 61,
+    "difference_groups": 56,
+    "groups_with_at_least_three": 1,
+    "progression_triplets": 1,
+    "disjoint_progression_triplets": 1,
+    "fully_magic_triplets": 0,
+    "duplicate_semimagic_classes": 0,
+    "accepted_classes": 1
+  }
+}

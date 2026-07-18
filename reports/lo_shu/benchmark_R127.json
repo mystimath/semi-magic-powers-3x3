@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-07-18T15:28:40.864233+00:00",
+  "python": "3.11.15 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:12:15) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "domain": {
+    "power": 2,
+    "max_root": 127,
+    "positive_roots": true,
+    "distinct_roots": true,
+    "target": "semimagic classes with at least one magic transversal",
+    "equivalence": "S3xS3 and transposition"
+  },
+  "repeats": 1,
+  "runs": [
+    {
+      "engine": "general_sum_index",
+      "run": 1,
+      "wall_seconds": 361.5185483999999,
+      "cpu_seconds": 360.9375,
+      "python_peak_bytes": 30781248,
+      "class_count": 1
+    },
+    {
+      "engine": "lo_shu_difference_index",
+      "run": 1,
+      "wall_seconds": 0.02080759999989823,
+      "cpu_seconds": 0.015625,
+      "python_peak_bytes": 33476,
+      "class_count": 1
+    }
+  ],
+  "medians": {
+    "general_sum_index": {
+      "wall_seconds": 361.5185483999999,
+      "cpu_seconds": 360.9375,
+      "python_peak_bytes": 30781248
+    },
+    "lo_shu_difference_index": {
+      "wall_seconds": 0.02080759999989823,
+      "cpu_seconds": 0.015625,
+      "python_peak_bytes": 33476
+    }
+  },
+  "specialized_wall_speedup": 17374.351121790503,
+  "class_sets_equal": true,
+  "class_count": 1,
+  "classes": [
+    [
+      2,
+      74,
+      127,
+      94,
+      97,
+      58,
+      113,
+      82,
+      46
+    ]
+  ],
+  "general_stats": {
+    "root_triples": 333375,
+    "distinct_sums": 32305,
+    "candidate_sums": 28717,
+    "triple_pairs": 2797149,
+    "disjoint_pairs": 2426304,
+    "row_alignments": 14557824,
+    "square_third_rows": 339,
+    "semimagic_classes": 48,
+    "transversal_classes": 1
+  },
+  "specialized_stats": {
+    "progressions": 51,
+    "difference_groups": 48,
+    "groups_with_at_least_three": 1,
+    "progression_triplets": 1,
+    "disjoint_progression_triplets": 1,
+    "fully_magic_triplets": 0,
+    "duplicate_semimagic_classes": 0,
+    "accepted_classes": 1
+  }
+}

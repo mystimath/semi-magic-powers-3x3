@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-07-18T15:28:53.608215+00:00",
+  "catalog": "C:\\dev\\mystimath\\semimagic-square-878\\data\\magic_transversal_classes_R1000.csv",
+  "max_root": 1000,
+  "published_classes": 10,
+  "generated_classes": 10,
+  "exact_set_equality": true,
+  "missing": [],
+  "unexpected": [],
+  "generated_stats": {
+    "progressions": 647,
+    "difference_groups": 593,
+    "groups_with_at_least_three": 10,
+    "progression_triplets": 10,
+    "disjoint_progression_triplets": 10,
+    "fully_magic_triplets": 0,
+    "duplicate_semimagic_classes": 0,
+    "accepted_classes": 10
+  }
+}
