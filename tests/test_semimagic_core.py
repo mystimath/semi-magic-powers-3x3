@@ -8,10 +8,12 @@ SRC = Path(__file__).resolve().parents[1] / "src"
 sys.path.insert(0, str(SRC))
 
 from semimagic_core import (  # noqa: E402
+    build_transversal_normalized_grid,
     canonical_grid,
     column_sums,
     derive_third_row,
     is_semimagic,
+    magic_transversal_count,
     make_power_tables,
     permute_grid,
     row_sums,
@@ -40,6 +42,14 @@ class SemimagicCoreTests(unittest.TestCase):
         self.assertEqual(row_sums(grid), (15, 15, 15))
         self.assertEqual(column_sums(grid), (15, 15, 15))
 
+    def test_transversal_normalized_grid_recovers_lo_shu(self) -> None:
+        grid = build_transversal_normalized_grid((8, 5, 2), 1)
+        self.assertEqual(grid, (8, 1, 6, 3, 5, 7, 4, 9, 2))
+        self.assertTrue(is_semimagic(grid))
+        self.assertEqual(magic_transversal_count(grid), 2)
+    def test_magic_transversal_count(self) -> None:
+        grid = (8, 1, 6, 3, 5, 7, 4, 9, 2)
+        self.assertEqual(magic_transversal_count(grid, 15), 2)
     def test_non_semimagic_grid(self) -> None:
         self.assertFalse(is_semimagic((1, 2, 3, 4, 5, 6, 7, 8, 9)))
 

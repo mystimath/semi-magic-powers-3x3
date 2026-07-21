@@ -2,21 +2,17 @@ from __future__ import annotations
 
 import argparse
 import csv
-from itertools import permutations
 from pathlib import Path
+
+from semimagic_core import magic_transversal_count
 
 
 CELLS = "abcdefghi"
 
 
 def transversal_count(row: dict[str, str]) -> int:
-    values = [int(row[f"value_{cell}"]) for cell in CELLS]
-    grid = [values[0:3], values[3:6], values[6:9]]
-    target = int(row["magic_sum"])
-    return sum(
-        grid[0][perm[0]] + grid[1][perm[1]] + grid[2][perm[2]] == target
-        for perm in permutations(range(3))
-    )
+    values = tuple(int(row[f"value_{cell}"]) for cell in CELLS)
+    return magic_transversal_count(values, int(row["magic_sum"]))
 
 
 def write_rows(path: Path, rows: list[dict[str, object]], fieldnames: list[str]) -> None:

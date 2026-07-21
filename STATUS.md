@@ -52,6 +52,12 @@ n'est annoncé avant la fin et l'agrégation de tous les shards.
 
 - [x] Étendre le catalogue des carrés à `R = 1000`.
 - [ ] Étendre progressivement le catalogue des carrés jusqu'à `R = 1500`.
+- [~] Prototyper un moteur à transversale imposée : validation autonome réussie à
+  `R = 127` (classe unique attendue). Le filtre précoce réduit les candidats
+  tardifs, mais laisse l'énumération des alignements ; remplacer ce balayage
+  par la paramétrisation normalisée documentée dans
+  `reports/transversal_engine_prototype_2026-07-21.md`, puis revalider jusqu'à
+  `R = 500` avant toute extension.
 
 - [x] Terminer le catalogue `power = 2` à `R = 500`.
 - [x] Après R = 500, vérifier toutes les classes power = 2 sur leur orbite et

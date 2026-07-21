@@ -37,6 +37,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--progress-a", type=int, default=10)
     parser.add_argument("--progress-shards", type=int, default=1)
     parser.add_argument("--max-results", type=int, default=0)
+    parser.add_argument(
+        "--require-magic-transversal",
+        action="store_true",
+        help="Conserve uniquement les carrés ayant une transversale de somme magique.",
+    )
     parser.add_argument("--out", type=Path)
     parser.add_argument("--summary-json", type=Path)
     return parser.parse_args()
@@ -55,6 +60,7 @@ def print_header(config: RunConfig, args: argparse.Namespace) -> None:
     print(f"Disque brut estimé        : {estimated_disk / (1024**2):,.1f} Mo")
     print(f"Répertoire de travail     : {args.work_dir}")
     print(f"Phase                     : {args.phase}")
+    print(f"Transversale imposée      : {args.require_magic_transversal}")
     print("=" * 78)
 
 
@@ -111,9 +117,14 @@ def main() -> int:
             config=config,
             max_results=args.max_results,
             progress_every_shards=args.progress_shards,
+            require_magic_transversal=args.require_magic_transversal,
         )
     elif args.phase == "aggregate":
-        summary = aggregate_search(args.work_dir, config)
+        summary = aggregate_search(
+            args.work_dir,
+            config,
+            require_magic_transversal=args.require_magic_transversal,
+        )
 
     if summary is not None:
         stats = summary["stats"]
@@ -129,6 +140,7 @@ def main() -> int:
         print(f"Alignements testés        : {stats['alignments_tested']:,}")
         print(f"Troisièmes lignes puissances: {stats['third_row_power_hits']:,}")
         print(f"Troisièmes triples indexés: {stats['third_triple_hits']:,}")
+        print(f"Rejets sans transversale  : {stats['magic_transversal_rejections']:,}")
         print(f"Solutions uniques         : {summary['results_count']:,}")
         export_summary(args, config, summary)
 

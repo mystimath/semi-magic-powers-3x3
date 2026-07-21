@@ -22,6 +22,7 @@ from semimagic_disk_backend import (  # noqa: E402
     shard_path,
     validate_disk_layout,
     _candidate_from_pair,
+    _has_magic_transversal_alignment,
 )
 
 
@@ -61,6 +62,14 @@ class DiskBackendTests(unittest.TestCase):
         self.assertEqual(shard_id_for_sum(config.max_sum, config), 7)
 
 
+    def test_transversal_alignment_predicate(self) -> None:
+        power_values = list(range(10))
+        self.assertTrue(
+            _has_magic_transversal_alignment((8, 1, 6), (3, 5, 7), power_values)
+        )
+        self.assertFalse(
+            _has_magic_transversal_alignment((1, 2, 4), (5, 6, 8), power_values)
+        )
     def test_pair_logic_with_lo_shu_identity_values(self) -> None:
         triples = [(1, 6, 8), (2, 4, 9), (3, 5, 7)]
         power_values = list(range(10))
@@ -141,7 +150,9 @@ class DiskBackendTests(unittest.TestCase):
             ]
             records.tofile(path)
 
-            payload = search_one_shard(work_dir, config, shard_id)
+            payload = search_one_shard(
+                work_dir, config, shard_id, require_magic_transversal=True
+            )
 
         self.assertEqual(payload["stats"]["solutions"], 1)
         result = payload["results"][0]
@@ -149,6 +160,7 @@ class DiskBackendTests(unittest.TestCase):
         self.assertEqual(observed_roots, expected_roots)
         self.assertEqual(result["magic_sum"], 21609)
         self.assertFalse(result["is_fully_magic"])
+        self.assertEqual(payload["stats"]["magic_transversal_rejections"], 0)
 
 
 if __name__ == "__main__":

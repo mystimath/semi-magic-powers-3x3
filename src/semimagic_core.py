@@ -124,6 +124,52 @@ def is_semimagic(grid: Sequence[int]) -> bool:
     return len(set(rows + cols)) == 1
 
 
+def build_transversal_normalized_grid(
+    diagonal: Sequence[int],
+    pivot: int,
+) -> Grid:
+    """Construit une grille semi-magique ayant la diagonale principale magique.
+
+    Pour diagonal = (a, e, i), pivot = b et S = a + e + i, la grille est
+    entièrement imposée par les six équations de lignes et colonnes :
+
+        a,       b, e + i - b
+        2i - b,  e, a + b - i
+        e-i+b, a+i-b, i
+
+    Toute grille semi-magique possédant une transversale magique peut être
+    ramenée à cette forme par une permutation de colonnes.
+    """
+    if len(diagonal) != 3:
+        raise ValueError("La diagonale doit contenir exactement trois valeurs.")
+    a, e, i = diagonal
+    return (
+        a,
+        pivot,
+        e + i - pivot,
+        2 * i - pivot,
+        e,
+        a + pivot - i,
+        e - i + pivot,
+        a + i - pivot,
+        i,
+    )
+
+def magic_transversal_count(grid: Sequence[int], target_sum: int | None = None) -> int:
+    """Compte les transversales (une case par ligne et colonne) de somme cible."""
+    _validate_grid_length(grid)
+    target = sum(grid[0:3]) if target_sum is None else target_sum
+    return sum(
+        grid[permutation[0]]
+        + grid[3 + permutation[1]]
+        + grid[6 + permutation[2]]
+        == target
+        for permutation in permutations((0, 1, 2))
+    )
+
+
+def has_magic_transversal(grid: Sequence[int], target_sum: int | None = None) -> bool:
+    return magic_transversal_count(grid, target_sum) > 0
 def transpose_grid(grid: Sequence[int]) -> Grid:
     _validate_grid_length(grid)
     return (

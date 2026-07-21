@@ -13,7 +13,13 @@ from typing import Any, Iterable
 
 import numpy as np
 
-from semimagic_core import canonical_grid, column_sums, is_semimagic, row_sums
+from semimagic_core import (
+    canonical_grid,
+    column_sums,
+    has_magic_transversal,
+    is_semimagic,
+    row_sums,
+)
 
 FORMAT_VERSION = 2
 
@@ -82,6 +88,8 @@ class SearchStats:
     alignments_tested: int = 0
     third_row_power_hits: int = 0
     third_triple_hits: int = 0
+    transversal_alignment_rejections: int = 0
+    magic_transversal_rejections: int = 0
     solutions: int = 0
     elapsed_seconds: float = 0.0
 
@@ -147,8 +155,13 @@ def shard_path(work_dir: Path, shard_id: int) -> Path:
     return work_dir / "shards" / f"shard_{shard_id:04d}.bin"
 
 
-def shard_result_path(work_dir: Path, shard_id: int) -> Path:
-    return work_dir / "search" / f"shard_{shard_id:04d}.json"
+def shard_result_path(
+    work_dir: Path,
+    shard_id: int,
+    require_magic_transversal: bool = False,
+) -> Path:
+    directory = "search_transversal_v3" if require_magic_transversal else "search"
+    return work_dir / directory / f"shard_{shard_id:04d}.json"
 
 
 def manifest_path(work_dir: Path) -> Path:
@@ -404,11 +417,30 @@ def _candidate_from_pair(
     return roots[0], roots[1], roots[2]  # type: ignore[return-value]
 
 
+def _has_magic_transversal_alignment(
+    first: tuple[int, int, int],
+    second: tuple[int, int, int],
+    power_values: list[int],
+) -> bool:
+    """Teste la contrainte nécessaire avant le calcul de la troisième ligne.
+
+    Si la troisième ligne est déduite par les colonnes, une transversale
+    (i, j, k) est magique exactement lorsque
+    first[i]^p + second[j]^p = first[k]^p + second[k]^p.
+    """
+    for i, j, k in permutations((0, 1, 2)):
+        if power_values[first[i]] + power_values[second[j]] == (
+            power_values[first[k]] + power_values[second[k]]
+        ):
+            return True
+    return False
+
 def search_one_shard(
     work_dir: Path,
     config: RunConfig,
     shard_id: int,
     max_results: int = 0,
+    require_magic_transversal: bool = False,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     path = shard_path(work_dir, shard_id)
@@ -460,6 +492,11 @@ def search_one_shard(
 
             for second_permuted in permutations(second):
                 stats.alignments_tested += 1
+                if require_magic_transversal and not _has_magic_transversal_alignment(
+                    first, second_permuted, power_values
+                ):
+                    stats.transversal_alignment_rejections += 1
+                    continue
                 third_or_none = _candidate_from_pair(
                     target_sum,
                     first,
@@ -485,6 +522,11 @@ def search_one_shard(
                 value_grid = tuple(power_values[root] for root in root_grid)
                 if not is_semimagic(value_grid):
                     raise RuntimeError("Erreur interne : grille non semi-magique.")
+                if require_magic_transversal and not has_magic_transversal(
+                    value_grid, target_sum
+                ):
+                    stats.magic_transversal_rejections += 1
+                    continue
 
                 canonical_roots = canonical_grid(root_grid)
                 if canonical_roots in seen_canonical:
@@ -528,6 +570,7 @@ def search_shards(
     config: RunConfig,
     max_results: int = 0,
     progress_every_shards: int = 1,
+    require_magic_transversal: bool = False,
 ) -> dict[str, Any]:
     manifest_file = manifest_path(work_dir)
     if not manifest_file.exists():
@@ -542,7 +585,9 @@ def search_shards(
     total_solutions = 0
 
     for shard_id in range(config.shard_count):
-        output_path = shard_result_path(work_dir, shard_id)
+        output_path = shard_result_path(
+            work_dir, shard_id, require_magic_transversal=require_magic_transversal
+        )
         if output_path.exists():
             payload = load_json(output_path)
             total_solutions += len(payload.get("results", []))
@@ -554,6 +599,7 @@ def search_shards(
             config=config,
             shard_id=shard_id,
             max_results=max_results,
+            require_magic_transversal=require_magic_transversal,
         )
         atomic_write_json(output_path, payload)
         total_solutions += len(payload["results"])
@@ -577,10 +623,16 @@ def search_shards(
         if max_results > 0 and total_solutions >= max_results:
             break
 
-    return aggregate_search(work_dir, config)
+    return aggregate_search(
+        work_dir, config, require_magic_transversal=require_magic_transversal
+    )
 
 
-def aggregate_search(work_dir: Path, config: RunConfig) -> dict[str, Any]:
+def aggregate_search(
+    work_dir: Path,
+    config: RunConfig,
+    require_magic_transversal: bool = False,
+) -> dict[str, Any]:
     aggregate_stats: dict[str, int | float] = {
         "records": 0,
         "sums_total": 0,
@@ -592,6 +644,8 @@ def aggregate_search(work_dir: Path, config: RunConfig) -> dict[str, Any]:
         "alignments_tested": 0,
         "third_row_power_hits": 0,
         "third_triple_hits": 0,
+        "transversal_alignment_rejections": 0,
+        "magic_transversal_rejections": 0,
         "solutions": 0,
         "elapsed_seconds": 0.0,
     }
@@ -608,19 +662,23 @@ def aggregate_search(work_dir: Path, config: RunConfig) -> dict[str, Any]:
         "alignments_tested",
         "third_row_power_hits",
         "third_triple_hits",
+        "transversal_alignment_rejections",
+        "magic_transversal_rejections",
         "solutions",
         "elapsed_seconds",
     )
 
     for shard_id in range(config.shard_count):
-        path = shard_result_path(work_dir, shard_id)
+        path = shard_result_path(
+            work_dir, shard_id, require_magic_transversal=require_magic_transversal
+        )
         if not path.exists():
             continue
         payload = load_json(path)
         completed_shards += 1
         stats = payload["stats"]
         for key in additive_keys:
-            aggregate_stats[key] = aggregate_stats[key] + stats[key]  # type: ignore[operator]
+            aggregate_stats[key] = aggregate_stats[key] + stats.get(key, 0)  # type: ignore[operator]
         aggregate_stats["max_group_size"] = max(
             int(aggregate_stats["max_group_size"]), int(stats["max_group_size"])
         )
