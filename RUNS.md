@@ -568,3 +568,22 @@ R=1000. Les nouvelles classes primitives du catalogue du projet entre 1001 et
 Elles sont nouvelles pour ce catalogue ; aucune antériorité externe n'est
 revendiquée. L'artefact complet est
 `reports/lo_shu/direct_catalog_R5000_20260721.json`.
+## Carrés à transversale magique — catalogue direct R = 10000
+
+- Date : 21 juillet 2026
+- Moteur et domaine : identiques au palier R=5000
+- Commande reproductible :
+
+```powershell
+python scripts/export_lo_shu_catalog.py --max-root 10000 `
+  --json-out reports/lo_shu/direct_catalog_R10000_20260721.json
+```
+
+- Classes acceptées : 137 ; primitives : 17
+- Temps du moteur : environ 4,5 s
+
+Le palier ajoute sept classes primitives au catalogue R=5000 : une de racine
+maximale 6014, trois distinctes de racine maximale 6271, puis 7820, 8263 et
+8434. Elles sont nouvelles dans le catalogue du projet ; aucune antériorité
+externe n'est revendiquée. Artefact complet :
+`reports/lo_shu/direct_catalog_R10000_20260721.json`.

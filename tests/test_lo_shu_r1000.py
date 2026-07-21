@@ -11,6 +11,14 @@ from lo_shu_search import search_seven_line_square_classes  # noqa: E402
 
 
 class PublishedCatalogRegressionTests(unittest.TestCase):
+    def test_direct_catalog_r5000_regression(self) -> None:
+        result = search_seven_line_square_classes(5000)
+        self.assertEqual(result.stats["accepted_classes"], 63)
+        self.assertEqual(sum(item.is_primitive for item in result.classes), 10)
+        self.assertEqual(
+            sorted(max(item.semimagic_key) for item in result.classes if item.is_primitive),
+            [127, 446, 878, 2434, 2982, 3134, 3191, 3642, 4583, 4893],
+        )
     def test_specialized_search_reproduces_the_ten_r1000_transversal_classes(self) -> None:
         result = search_seven_line_square_classes(1000)
         self.assertEqual(result.stats["accepted_classes"], 10)
