@@ -587,3 +587,10 @@ maximale 6014, trois distinctes de racine maximale 6271, puis 7820, 8263 et
 8434. Elles sont nouvelles dans le catalogue du projet ; aucune antériorité
 externe n'est revendiquée. Artefact complet :
 `reports/lo_shu/direct_catalog_R10000_20260721.json`.
+### Correction de provenance — classes R = 6271
+
+Les trois classes primitives distinctes de racine maximale 6271 ne sont pas
+nouvelles au sens externe : elles ont été publiquement données par Navin451 le
+8 novembre 2025 dans le fil Plus.maths.org « Win money with magic squares ».
+Le catalogue les reproduit à symétries près. Voir
+`reports/lo_shu/external_crosscheck_R6271_navin451_20260721.md`.
