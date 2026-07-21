@@ -15,7 +15,14 @@ logs/**/*.log
 config/**/*.yaml
 config/**/*.yml
 CODEX_POWER4_TASK.md
+codex*.md
+run_codex_sessions.ps1
 
 # Conserver les dossiers vides
 !results/**/.gitkeep
 !logs/**/.gitkeep
+
+# État local des outils d'assistance
+.codex/
+.codex-state/
+logs/codex-sessions/
