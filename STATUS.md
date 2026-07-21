@@ -30,6 +30,12 @@
 - [x] Analyse des orbites `power = 2` à `R = 1000` : 10 classes avec une
   transversale magique ; nouvelle classe primitive du catalogue à racine
   maximale 878, sans présumer de son antériorité externe.
+- [x] Catalogue spécialisé Lo Shu jusqu'à `R = 5000` : 63 classes à
+  transversale magique, dont 10 primitives. Les sept nouvelles classes
+  primitives du catalogue du projet au-delà de `R = 1000` ont pour racines
+  maximales 2434, 2982, 3134, 3191, 3642, 4583 et 4893 ; aucune revendication
+  d'antériorité externe. Artefact :
+  `reports/lo_shu/direct_catalog_R5000_20260721.json`.
 - [x] Cubes jusqu'à `R = 500` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 750` : recherche complète, résultat nul.
 - [x] Cubes jusqu'à `R = 1000` : recherche complète, résultat nul.
@@ -52,12 +58,12 @@ n'est annoncé avant la fin et l'agrégation de tous les shards.
 
 - [x] Étendre le catalogue des carrés à `R = 1000`.
 - [ ] Étendre progressivement le catalogue des carrés jusqu'à `R = 1500`.
-- [~] Prototyper un moteur à transversale imposée : validation autonome réussie à
-  `R = 127` (classe unique attendue). Le filtre précoce réduit les candidats
-  tardifs, mais laisse l'énumération des alignements ; remplacer ce balayage
-  par la paramétrisation normalisée documentée dans
-  `reports/transversal_engine_prototype_2026-07-21.md`, puis revalider jusqu'à
-  `R = 500` avant toute extension.
+- [x] Prototyper un moteur à transversale imposée : validation autonome à
+  `R = 127`, puis équivalence spécialisée validée à `R = 500`. Le moteur Lo Shu
+  est désormais le chemin de référence pour cette cible.
+- [ ] Étendre progressivement le catalogue spécialisé Lo Shu au-delà de
+  `R = 5000`, avec artefact JSON, test de régression et vérification des
+  classes primitives à chaque palier.
 
 - [x] Terminer le catalogue `power = 2` à `R = 500`.
 - [x] Après R = 500, vérifier toutes les classes power = 2 sur leur orbite et

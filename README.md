@@ -21,6 +21,19 @@ muni d'un manifeste compatible est repris sans `--overwrite`. Les résultats de
 chaque shard sont conservés dans `work/.../search`, ce qui permet de ne retraiter
 que les shards manquants.
 
+## Recherche spécialisée : transversale magique
+
+Pour les carrés semi-magiques de carrés ayant une transversale de somme magique
+(septième alignement), utiliser le moteur Lo Shu plutôt que V2 : il est exact
+sur cette sous-famille et évite le balayage des paires de triples.
+
+```powershell
+python scripts/export_lo_shu_catalog.py --max-root 5000 `
+  --json-out reports/lo_shu/direct_catalog_R5000_YYYYMMDD.json
+```
+
+Le moteur général V2 reste l’oracle de comparaison aux petites bornes ; ne pas
+l’employer pour étendre cette sous-famille après validation de l’équivalence.
 ## Extension incrémentale V3
 
 ```powershell

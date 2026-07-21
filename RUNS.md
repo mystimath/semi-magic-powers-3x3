@@ -544,3 +544,27 @@ Ne pas lancer de recherche power 4 à R = 5000.
 L'analyse des orbites trouve dix classes à transversale magique. Sept sont les changements d'échelle ×1 à ×7 de Sallows, deux sont la classe 446 et son changement d'échelle ×2, et une classe primitive supplémentaire a pour racine maximale 878. Chacune possède exactement une transversale magique ; aucune classe n'est pleinement magique. La classe R878 est nouvelle dans le catalogue du projet, sans préjuger d'une éventuelle antériorité externe.
 
 La validation des 166 167 000 records et les 22 tests du moteur réussissent. Artefacts : `work/squares_R1000`, CSV principal, catalogues complet, primitif et à diagonale magique, résumé JSON, rapport R1000 et `scripts/run_squares_R1000_parallel.ps1`.
+## Carrés à transversale magique — catalogue direct R = 5000
+
+- Date : 21 juillet 2026
+- Domaine : racines positives, neuf racines distinctes ; carré semi-magique
+  avec une transversale magique
+- Moteur : `lo_shu_difference_index` (`src/lo_shu_search.py`)
+- Commande reproductible :
+
+```powershell
+python scripts/export_lo_shu_catalog.py --max-root 5000 `
+  --json-out reports/lo_shu/direct_catalog_R5000_20260721.json
+```
+
+- Progressions de trois carrés : 4 252
+- Groupes de raison : 3 898 ; groupes d'au moins trois progressions : 63
+- Classes acceptées : 63 ; primitives : 10
+- Temps du moteur : environ 1,2 s sur l'environnement de campagne
+
+Les primitives de racine maximale 127, 446 et 878 confirment le catalogue
+R=1000. Les nouvelles classes primitives du catalogue du projet entre 1001 et
+5000 ont pour racines maximales 2434, 2982, 3134, 3191, 3642, 4583 et 4893.
+Elles sont nouvelles pour ce catalogue ; aucune antériorité externe n'est
+revendiquée. L'artefact complet est
+`reports/lo_shu/direct_catalog_R5000_20260721.json`.
